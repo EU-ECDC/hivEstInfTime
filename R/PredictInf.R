@@ -5,6 +5,7 @@
 #' @param input input
 #' @param params params
 #' @param sampleSize sampleSize
+#' @param percentiles percentiles
 #'
 #' @return data.table
 #'
@@ -17,11 +18,16 @@
 PredictInf <- function( # nolint
   input,
   params = GetMigrantParams(),
-  sampleSize = 50
+  sampleSize = 50,
+  percentiles = c(0.025, 0.5, 0.975)
 ) {
   outputAIDS <- data.table::copy(input$Data$AIDS)
   outputCD4VL <- data.table::copy(input$Data$CD4VL)
   sampleColNames <- paste0('SCtoDiag', seq_len(sampleSize))
+  percColNames <- character()
+  if (length(percentiles) > 0) {
+    percColNames <- paste0('Perc', percentiles)
+  }
 
   if (is.null(outputAIDS)) {
     outputAIDS <- data.table::data.table(
@@ -49,6 +55,9 @@ PredictInf <- function( # nolint
     EstSCtoDiag = NA_real_
   )]
   outputAIDS[, (sampleColNames) := NA_real_]
+  if (length(percColNames) > 0) {
+    outputAIDS[, (percColNames) := NA_real_]
+  }
 
   xAIDS <- cbind(
     1,
@@ -99,10 +108,16 @@ PredictInf <- function( # nolint
       kappa = params$kappa
     ), silent = TRUE)
 
-    if (IsError(intFit1) || IsError(intFit2) || intFit1$message != 'OK' || intFit2$message != 'OK') { # nolint
+    if (
+      IsError(intFit1) ||
+      IsError(intFit2) ||
+      intFit1$message != 'OK' ||
+      intFit2$message != 'OK'
+    ) {
       next
     } else {
-      outputAIDS[i, ProbPre := intFit2$value / (intFit1$value + intFit2$value)]
+      outputAIDS[i, V := intFit1$value + intFit2$value]
+      outputAIDS[i, ProbPre := intFit2$value / V]
 
       modeFit <- try(stats::optim(
         outputAIDS$Mig[i],
@@ -133,6 +148,10 @@ PredictInf <- function( # nolint
           kappa = params$kappa
         ))]
       }
+
+      if (length(percentiles) > 0) {
+        # TO BE IMPLEMENTED
+      }
     }
   }
   endTime <- Sys.time()
@@ -154,14 +173,17 @@ PredictInf <- function( # nolint
     EstSCtoDiag = NA_real_
   )]
   outputCD4VL[, (sampleColNames) := NA_real_]
+  if (length(percColNames) > 0) {
+    outputCD4VL[, (percColNames) := NA_real_]
+  }
 
-  i <- 0
+  i <- 0L
   startTime <- Sys.time()
   lastTime <- startTime
   PrintH1('Processing CD4VL data')
   PrintAlert('Start time: {format(startTime)}')
   for (uniqueId in outputCD4VL[, unique(UniqueId)]) {
-    i <- i + 1
+    i <- i + 1L
     if (i %% 1000 == 0) {
       currentTime <- Sys.time()
       percComplete <- stringi::stri_pad_left(sprintf('%0.2f%%', i / countCD4VL * 100), width = 8)
@@ -181,6 +203,9 @@ PredictInf <- function( # nolint
         EstSCtoDiag = 0
       )]
       outputCD4VL[UniqueId == uniqueId, (sampleColNames) := 0]
+      if (length(percColNames) > 0) {
+        outputCD4VL[UniqueId == uniqueId, (percColNames) := 0]
+      }
       next
     }
 
@@ -193,19 +218,21 @@ PredictInf <- function( # nolint
     kappa <- params$kappa
     bFE <- matrix(params$bFE, ncol = 1)
     varCovRE <- params$varCovRE
-    formulaeData <- dt[, .(Gender, MigrantRegionOfOrigin, Transmission, Age, DTime, Calendar, Consc, Consr)] # nolint
+    formulaeData <- dt[, .(
+      Gender, MigrantRegionOfOrigin, Transmission, Age, DTime, Calendar, Consc, Consr
+    )]
     fxCD4Data <- formulaeData[Consc == 1]
-    baseCD4DM <- GetBaseCD4DesignMatrix(fxCD4Data)
+    baseCD4DM <- HivEstInfTime:::GetBaseCD4DesignMatrix(fxCD4Data)
     fxVLData <- formulaeData[Consr == 1]
-    baseVLDM <- GetBaseVLDesignMatrix(fxVLData)
+    baseVLDM <- HivEstInfTime:::GetBaseVLDesignMatrix(fxVLData)
     fzData <- dt[, .(Consc, CobsTime, Consr, RobsTime, RLogObsTime2, DTime)]
-    baseRandEffDM <- GetBaseRandEffDesignMatrix(fzData)
+    baseRandEffDM <- HivEstInfTime:::GetBaseRandEffDesignMatrix(fzData)
 
     sigma2 <- params$sigma2
     errM <- dt$Consc * sigma2[1] + dt$Consr * sigma2[2]
     err <- diag(errM, nrow = length(errM))
 
-    intFit1 <- try(IntegratePostW(
+    intFit1 <- try(HivEstInfTime:::IntegratePostW(
       lower = 0,
       upper = migTime,
       y = y,
@@ -224,7 +251,7 @@ PredictInf <- function( # nolint
       err = err
     ), silent = TRUE)
 
-    intFit2 <- try(IntegratePostW(
+    intFit2 <- try(HivEstInfTime:::IntegratePostW(
       lower = migTime,
       upper = upTime,
       y = y,
@@ -244,13 +271,17 @@ PredictInf <- function( # nolint
     ), silent = TRUE)
 
     if (
-      IsError(intFit1) || IsError(intFit2) ||
-        intFit1$errorCode != 0 || intFit2$errorCode != 0 ||
-        is.na(intFit1$value) || is.na(intFit2$value)
+      IsError(intFit1) ||
+      IsError(intFit2) ||
+      intFit1$errorCode != 0 ||
+      intFit2$errorCode != 0 ||
+      is.na(intFit1$value) ||
+      is.na(intFit2$value)
     ) {
       next
     } else {
-      outputCD4VL[UniqueId == uniqueId, ProbPre := intFit2$value / (intFit1$value + intFit2$value)]
+      outputCD4VL[UniqueId == uniqueId, V := intFit1$value + intFit2$value]
+      outputCD4VL[UniqueId == uniqueId, ProbPre := intFit2$value / V]
 
       modeFit <- try(stats::optim(
         migTime,
@@ -301,20 +332,52 @@ PredictInf <- function( # nolint
           err = err
         ))]
       }
+
+      outputCD4VL[
+        UniqueId == uniqueId,
+        (percColNames) := lapply(
+          percentiles,
+          GetPercentile,
+          v = intFit1$value + intFit2$value,
+          upTime = upTime,
+          lower = 0,
+          y = y,
+          xAIDS = xAIDS,
+          maxDTime = maxDTime,
+          betaAIDS = betaAIDS,
+          kappa = kappa,
+          bFE = bFE,
+          varCovRE = varCovRE,
+          baseCD4DM = baseCD4DM,
+          fxCD4Data = fxCD4Data,
+          baseVLDM = baseVLDM,
+          fxVLData = fxVLData,
+          baseRandEffDM = baseRandEffDM,
+          fzData = fzData,
+          err = err
+        )
+      ]
     }
   }
   endTime <- Sys.time()
   if (countCD4VL > 0) {
-      percComplete <- stringi::stri_pad_left(sprintf('%0.2f%%', i / countCD4VL * 100), width = 8)
-      iterComplete <- stringi::stri_pad_left(sprintf('%d/%d', i, countCD4VL), width = countCD4VLNChar * 2 + 1) # nolint
-      elapsedTime <- prettyunits::pretty_dt(endTime - startTime)
-      PrintAlert('{percComplete} ({iterComplete}) - {.timestamp {elapsedTime}}', type = 'success')
+    percComplete <- stringi::stri_pad_left(sprintf('%0.2f%%', i / countCD4VL * 100), width = 8)
+    iterComplete <- stringi::stri_pad_left(sprintf('%d/%d', i, countCD4VL), width = countCD4VLNChar * 2 + 1) # nolint
+    elapsedTime <- prettyunits::pretty_dt(endTime - startTime)
+    PrintAlert('{percComplete} ({iterComplete}) - {.timestamp {elapsedTime}}', type = 'success')
   } else {
     PrintAlert('No CD4VL data to be processed')
   }
   PrintAlert('End time: {format(endTime)}')
 
-  outputColNames <- union(c('UniqueId', 'ProbPre', 'Mig', 'ModeSCtoDiag'), sampleColNames)
+  outputColNames <- Reduce(
+    union,
+    list(
+      c('UniqueId', 'ProbPre', 'Mig', 'ModeSCtoDiag'),
+      sampleColNames,
+      percColNames
+    )
+  )
   table <- list()
   if (nrow(outputAIDS) > 0) {
     table[['AIDS']] <- outputAIDS[, ..outputColNames]

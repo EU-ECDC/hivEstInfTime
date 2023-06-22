@@ -4,7 +4,12 @@
 \alias{PredictInf}
 \title{PredictInf}
 \usage{
-PredictInf(input, params = GetMigrantParams(), sampleSize = 50)
+PredictInf(
+  input,
+  params = GetMigrantParams(),
+  sampleSize = 50,
+  percentiles = c(0.025, 0.5, 0.975)
+)
 }
 \arguments{
 \item{input}{input}
@@ -12,6 +17,8 @@ PredictInf(input, params = GetMigrantParams(), sampleSize = 50)
 \item{params}{params}
 
 \item{sampleSize}{sampleSize}
+
+\item{percentiles}{percentiles}
 }
 \value{
 data.table

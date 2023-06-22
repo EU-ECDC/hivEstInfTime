@@ -52,6 +52,7 @@ input <- list(
 
 # Create test dataset
 test <- HivEstInfTime::PredictInf(input, params)
+test <- HivEstInfTime::GetStats(predictions = test, input)
 
 # Reconcile
 recon <- rbind(
@@ -71,3 +72,30 @@ compare[, Diff := ProbPre.Recon - ProbPre.Test]
 # Show differences
 compare[abs(Diff) > 1e-3]
 compare[is.na(ProbPre.Test)]
+
+
+
+baseCD4VL2 <- reconCD4VL[, 1:27]
+isLabelled <- sapply(baseCD4VL2, haven::is.labelled)
+colNames <- names(isLabelled[isLabelled])
+baseCD4VL2[, (colNames) := lapply(.SD, haven::as_factor), .SDcols = colNames]
+data.table::setnames(
+  baseCD4VL2,
+  c(
+    'RecordId', 'DateOfExam', 'YVar', 'Indi', 'Gender', 'Transmission', 'Age',
+    'MigrantRegionOfOrigin', 'Calendar', 'Art', 'DateOfArt', 'DateOfHIVDiagnosis',
+    'DateOfAIDSDiagnosis', 'DateOfArrival', 'DateOfBirth', 'AtRiskDate', 'U', 'Mig', 'KnownPrePost',
+    'DTime', 'UniqueId', 'Consc', 'Consr', 'CobsTime', 'RobsTime', 'RLogObsTime2', 'Only'
+  )
+)
+currentLevels <- levels(baseCD4VL2$Gender)
+newLevels <- c('M', 'F')
+levels(baseCD4VL2$Gender) <- newLevels[match(currentLevels, c('Male', 'Female'))]
+baseCD4VL2[, Ord := data.table::rowid(UniqueId)]
+baseCD4VL2[, UniqueId := UniqueId + max(baseAIDS$UniqueId)]
+input <- list(
+  Data = list(
+    AIDS = baseAIDS,
+    CD4VL = baseCD4VL2
+  )
+)
