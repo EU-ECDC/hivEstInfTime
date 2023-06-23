@@ -19,7 +19,7 @@ PredictInf <- function( # nolint
   input,
   params = GetMigrantParams(),
   sampleSize = 50,
-  percentiles = c(0.025, 0.5, 0.975)
+  percentiles = c()
 ) {
   outputAIDS <- data.table::copy(input$Data$AIDS)
   outputCD4VL <- data.table::copy(input$Data$CD4VL)
@@ -85,6 +85,9 @@ PredictInf <- function( # nolint
         EstSCtoDiag = NA_real_
       )]
       outputAIDS[i, (sampleColNames) := 0]
+      if (length(percColNames) > 0) {
+        outputAIDS[i, (percColNames) := 0]
+      }
       next
     }
 
@@ -149,8 +152,21 @@ PredictInf <- function( # nolint
         ))]
       }
 
-      if (length(percentiles) > 0) {
-        # TO BE IMPLEMENTED
+      if (length(percColNames) > 0) {
+        outputAIDS[
+          i,
+          (percColNames) := lapply(
+            percentiles,
+            GetPercentileAIDS,
+            v = V,
+            upTime = outputAIDS$U[i],
+            lower = 0,
+            x = xAIDS[i, ],
+            dTime = outputAIDS$DTime[i],
+            betaAIDS = params$betaAIDS,
+            kappa = params$kappa
+          )
+        ]
       }
     }
   }
@@ -333,30 +349,33 @@ PredictInf <- function( # nolint
         ))]
       }
 
-      outputCD4VL[
-        UniqueId == uniqueId,
-        (percColNames) := lapply(
-          percentiles,
-          GetPercentile,
-          v = intFit1$value + intFit2$value,
-          upTime = upTime,
-          lower = 0,
-          y = y,
-          xAIDS = xAIDS,
-          maxDTime = maxDTime,
-          betaAIDS = betaAIDS,
-          kappa = kappa,
-          bFE = bFE,
-          varCovRE = varCovRE,
-          baseCD4DM = baseCD4DM,
-          fxCD4Data = fxCD4Data,
-          baseVLDM = baseVLDM,
-          fxVLData = fxVLData,
-          baseRandEffDM = baseRandEffDM,
-          fzData = fzData,
-          err = err
-        )
-      ]
+      if (length(percColNames) > 0) {
+        outputCD4VL[
+          UniqueId == uniqueId,
+          (percColNames) := lapply(
+            percentiles,
+            GetPercentileCD4VL,
+            v = intFit1$value + intFit2$value,
+            upTime = upTime,
+            lower = 0,
+            y = y,
+            xAIDS = xAIDS,
+            maxDTime = maxDTime,
+            betaAIDS = betaAIDS,
+            kappa = kappa,
+            bFE = bFE,
+            varCovRE = varCovRE,
+            baseCD4DM = baseCD4DM,
+            fxCD4Data = fxCD4Data,
+            baseVLDM = baseVLDM,
+            fxVLData = fxVLData,
+            baseRandEffDM = baseRandEffDM,
+            fzData = fzData,
+            err = err
+          )
+        ]
+      }
+
     }
   }
   endTime <- Sys.time()

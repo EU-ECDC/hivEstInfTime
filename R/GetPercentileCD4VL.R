@@ -1,4 +1,4 @@
-GetPercentile <- function(
+GetPercentileCD4VL <- function(
   p = 0.5,
   v = NULL,
   upTime = NULL,
@@ -83,8 +83,7 @@ GetPercentile <- function(
   ), silent = TRUE)
 
   percentile <- ifelse(
-    IsError(fit) ||
-    is.na(fit$root),
+    IsError(fit) || is.na(fit$root),
     NA_real_,
     fit$root
   )

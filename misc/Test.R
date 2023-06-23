@@ -52,6 +52,7 @@ input <- list(
 
 # Create test dataset
 test <- HivEstInfTime::PredictInf(input, params)
+test2 <- HivEstInfTime::PredictInf(input, params, percentiles = c(0.025, 0.5, 0.975))
 test <- HivEstInfTime::GetStats(predictions = test, input)
 
 # Reconcile
