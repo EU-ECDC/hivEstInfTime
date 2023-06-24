@@ -1,5 +1,5 @@
-#ifndef _hivPlatform_header_
-#define _hivPlatform_header_
+#ifndef _HivEstInfTime_header_
+#define _HivEstInfTime_header_
 
 // [[Rcpp::depends(RcppArmadillo)]]
 // [[Rcpp::depends(RcppEigen)]]
@@ -21,9 +21,10 @@
 #include "Lspline.hpp"
 #include "GetLogMVNPdf.hpp"
 #include "PostW.hpp"
+#include "MeanPostW.hpp"
 
 #ifdef _OPENMP
 #include <omp.h>
 #endif
 
-#endif // _hivPlatform_header_
+#endif // _HivEstInfTime_header_

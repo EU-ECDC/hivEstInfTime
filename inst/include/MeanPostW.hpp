@@ -1,5 +1,5 @@
-#ifndef _HivEstInfTime_PostW_
-#define _HivEstInfTime_PostW_
+#ifndef _HivEstInfTime_MeanPostW_
+#define _HivEstInfTime_MeanPostW_
 
 #include "Lspline.hpp"
 #include "UpdateCD4DesignMatrix.hpp"
@@ -9,7 +9,7 @@
 
 namespace HivEstInfTime {
 
-class PostW: public Numer::Func
+class MeanPostW: public Numer::Func
 {
 private:
   const arma::dvec& y;
@@ -27,7 +27,7 @@ private:
   const Rcpp::DataFrame& fzData;
   const arma::dmat& err;
 public:
-  PostW(
+  MeanPostW(
     const arma::dvec& y_,
     const arma::dmat& xAIDS_,
     const double& maxDTime_,
@@ -78,10 +78,10 @@ public:
     const arma::dvec mu = x * bFE;
     const arma::dmat var = z * (varCovRE * z.t()) + err;
 
-    return std::exp(GetLogMVNPdf(y, mu, var) - lambda * std::pow(w + maxDTime, kappa));
+    return w * std::exp(GetLogMVNPdf(y, mu, var) - lambda * std::pow(w + maxDTime, kappa));
   }
 };
 
 } // namespace
 
-#endif // _HivEstInfTime_PostW_
+#endif // _HivEstInfTime_MeanPostW_

@@ -5,10 +5,10 @@ GetBaseCD4DesignMatrix <- function(
     formula(
       ~
       DTime * Gender +
-        DTime * MigrantRegionOfOrigin +
-        DTime * Transmission +
-        DTime * Lspline(Age, knots = c(25, 35, 45)) +
-        Lspline(Calendar, knots = c(16, 22))
+      DTime * MigrantRegionOfOrigin +
+      DTime * Transmission +
+      DTime * Lspline(Age, knots = c(25, 35, 45)) +
+      Lspline(Calendar, knots = c(16, 22))
     ),
     data = data
   )
@@ -35,15 +35,15 @@ GetBaseVLDesignMatrix <- function(
   dm <- model.matrix(
     formula(
       ~
-        DTime * Gender +
-          DTime * MigrantRegionOfOrigin +
-          DTime * Transmission +
-          DTime * Lspline(Age, knots = c(25, 35, 45)) +
-          log(DTime) * Gender +
-          log(DTime) * MigrantRegionOfOrigin +
-          log(DTime) * Transmission +
-          log(DTime) * Lspline(Age, knots = c(25, 35, 45)) +
-          Lspline(Calendar, knots = c(16, 22))
+      DTime * Gender +
+      DTime * MigrantRegionOfOrigin +
+      DTime * Transmission +
+      DTime * Lspline(Age, knots = c(25, 35, 45)) +
+      log(DTime) * Gender +
+      log(DTime) * MigrantRegionOfOrigin +
+      log(DTime) * Transmission +
+      log(DTime) * Lspline(Age, knots = c(25, 35, 45)) +
+      Lspline(Calendar, knots = c(16, 22))
     ),
     data = data
   )
@@ -75,9 +75,9 @@ GetBaseRandEffDesignMatrix <- function(
   dm <- model.matrix(
     formula(
       ~
-        -1 +
-          Consc + I(DTime * Consc) +
-          Consr + I(DTime * Consr) + I(log(DTime + 1) * Consr)
+      -1 +
+      Consc + I(DTime * Consc) +
+      Consr + I(DTime * Consr) + I(log(DTime + 1) * Consr)
     ),
     data = data
   )
@@ -109,3 +109,18 @@ PostWAIDS <- function(
 
 # Vectorize the functions as the "integrate" function works with vectorized functions
 VPostWAIDS <- Vectorize(PostWAIDS, vectorize.args = c('w'))
+
+MeanPostWAIDS <- function(
+  w,
+  x,
+  dTime,
+  betaAIDS,
+  kappa
+) {
+  p <- w * PostWAIDS(w, x, dTime, betaAIDS, kappa)
+
+  return(p)
+}
+
+# Vectorize the functions as the "integrate" function works with vectorized functions
+VMeanPostWAIDS <- Vectorize(MeanPostWAIDS, vectorize.args = c('w'))

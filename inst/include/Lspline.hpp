@@ -1,7 +1,7 @@
-#ifndef _hivPlatform_Lspline_
-#define _hivPlatform_Lspline_
+#ifndef _HivEstInfTime_Lspline_
+#define _HivEstInfTime_Lspline_
 
-namespace hivPlatform {
+namespace HivEstInfTime {
 
 Rcpp::NumericVector Lspline(
   const Rcpp::NumericVector& x,
@@ -24,4 +24,4 @@ Rcpp::NumericVector Lspline(
 
 } // namespace
 
-#endif // _hivPlatform_Lspline_
+#endif // _HivEstInfTime_Lspline_

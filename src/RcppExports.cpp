@@ -113,6 +113,32 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// IntegrateMeanPostW
+Rcpp::List IntegrateMeanPostW(const double& lower, const double& upper, const arma::dvec& y, const arma::dmat& xAIDS, const double& maxDTime, const arma::dmat& betaAIDS, const double& kappa, const arma::dmat& bFE, const arma::dmat& varCovRE, const Rcpp::List& baseCD4DM, const Rcpp::DataFrame& fxCD4Data, const Rcpp::List& baseVLDM, const Rcpp::DataFrame& fxVLData, const Rcpp::List& baseRandEffDM, const Rcpp::DataFrame& fzData, const arma::dmat& err);
+RcppExport SEXP _HivEstInfTime_IntegrateMeanPostW(SEXP lowerSEXP, SEXP upperSEXP, SEXP ySEXP, SEXP xAIDSSEXP, SEXP maxDTimeSEXP, SEXP betaAIDSSEXP, SEXP kappaSEXP, SEXP bFESEXP, SEXP varCovRESEXP, SEXP baseCD4DMSEXP, SEXP fxCD4DataSEXP, SEXP baseVLDMSEXP, SEXP fxVLDataSEXP, SEXP baseRandEffDMSEXP, SEXP fzDataSEXP, SEXP errSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const double& >::type lower(lowerSEXP);
+    Rcpp::traits::input_parameter< const double& >::type upper(upperSEXP);
+    Rcpp::traits::input_parameter< const arma::dvec& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< const arma::dmat& >::type xAIDS(xAIDSSEXP);
+    Rcpp::traits::input_parameter< const double& >::type maxDTime(maxDTimeSEXP);
+    Rcpp::traits::input_parameter< const arma::dmat& >::type betaAIDS(betaAIDSSEXP);
+    Rcpp::traits::input_parameter< const double& >::type kappa(kappaSEXP);
+    Rcpp::traits::input_parameter< const arma::dmat& >::type bFE(bFESEXP);
+    Rcpp::traits::input_parameter< const arma::dmat& >::type varCovRE(varCovRESEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type baseCD4DM(baseCD4DMSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::DataFrame& >::type fxCD4Data(fxCD4DataSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type baseVLDM(baseVLDMSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::DataFrame& >::type fxVLData(fxVLDataSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type baseRandEffDM(baseRandEffDMSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::DataFrame& >::type fzData(fzDataSEXP);
+    Rcpp::traits::input_parameter< const arma::dmat& >::type err(errSEXP);
+    rcpp_result_gen = Rcpp::wrap(IntegrateMeanPostW(lower, upper, y, xAIDS, maxDTime, betaAIDS, kappa, bFE, varCovRE, baseCD4DM, fxCD4Data, baseVLDM, fxVLData, baseRandEffDM, fzData, err));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_HivEstInfTime_Lspline", (DL_FUNC) &_HivEstInfTime_Lspline, 2},
@@ -120,6 +146,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_HivEstInfTime_PostW", (DL_FUNC) &_HivEstInfTime_PostW, 15},
     {"_HivEstInfTime_VPostW", (DL_FUNC) &_HivEstInfTime_VPostW, 15},
     {"_HivEstInfTime_IntegratePostW", (DL_FUNC) &_HivEstInfTime_IntegratePostW, 16},
+    {"_HivEstInfTime_IntegrateMeanPostW", (DL_FUNC) &_HivEstInfTime_IntegrateMeanPostW, 16},
     {NULL, NULL, 0}
 };
 

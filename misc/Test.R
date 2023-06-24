@@ -76,10 +76,10 @@ compare[is.na(ProbPre.Test)]
 
 
 
-baseCD4VL2 <- reconCD4VL[, 1:27]
-isLabelled <- sapply(baseCD4VL2, haven::is.labelled)
+baseCD4VL <- reconCD4VL[, 1:27]
+isLabelled <- sapply(baseCD4VL, haven::is.labelled)
 colNames <- names(isLabelled[isLabelled])
-baseCD4VL2[, (colNames) := lapply(.SD, haven::as_factor), .SDcols = colNames]
+baseCD4VL[, (colNames) := lapply(.SD, haven::as_factor), .SDcols = colNames]
 data.table::setnames(
   baseCD4VL2,
   c(

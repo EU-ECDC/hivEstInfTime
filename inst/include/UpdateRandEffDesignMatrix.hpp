@@ -1,7 +1,7 @@
-#ifndef _hivPlatform_UpdateRandEffDesignMatrix_
-#define _hivPlatform_UpdateRandEffDesignMatrix_
+#ifndef _HivEstInfTime_UpdateRandEffDesignMatrix_
+#define _HivEstInfTime_UpdateRandEffDesignMatrix_
 
-namespace hivPlatform {
+namespace HivEstInfTime {
 
 arma::dmat UpdateRandEffDesignMatrix(
   const Rcpp::List& baseDM,
@@ -31,4 +31,4 @@ arma::dmat UpdateRandEffDesignMatrix(
 
 } // namespace
 
-#endif // _hivPlatform_UpdateRandEffDesignMatrix_
+#endif // _HivEstInfTime_UpdateRandEffDesignMatrix_

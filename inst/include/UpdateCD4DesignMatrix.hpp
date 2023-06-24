@@ -1,9 +1,9 @@
-#ifndef _hivPlatform_UpdateCD4DesignMatrix_
-#define _hivPlatform_UpdateCD4DesignMatrix_
+#ifndef _HivEstInfTime_UpdateCD4DesignMatrix_
+#define _HivEstInfTime_UpdateCD4DesignMatrix_
 
 #include "const.h"
 
-namespace hivPlatform {
+namespace HivEstInfTime {
 
 arma::dmat UpdateCD4DesignMatrix(
   const Rcpp::List& baseDM,
@@ -45,4 +45,4 @@ arma::dmat UpdateCD4DesignMatrix(
 
 } // namespace
 
-#endif // _hivPlatform_UpdateCD4DesignMatrix_
+#endif // _HivEstInfTime_UpdateCD4DesignMatrix_
