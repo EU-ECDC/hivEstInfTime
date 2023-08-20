@@ -38,7 +38,7 @@ GetPercentileCD4VL <- function(
     fzData = fzData,
     err = err
     ) {
-    res <- HivEstInfTime:::IntegratePostW(
+    res <- IntegratePostW(
       upper = upTime,
       lower = 0,
       y = y,

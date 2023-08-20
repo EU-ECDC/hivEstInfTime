@@ -262,17 +262,17 @@ PredictInf <- function( # nolint
       Gender, MigrantRegionOfOrigin, Transmission, Age, DTime, Calendar, Consc, Consr
     )]
     fxCD4Data <- formulaeData[Consc == 1]
-    baseCD4DM <- HivEstInfTime:::GetBaseCD4DesignMatrix(fxCD4Data)
+    baseCD4DM <- GetBaseCD4DesignMatrix(fxCD4Data)
     fxVLData <- formulaeData[Consr == 1]
-    baseVLDM <- HivEstInfTime:::GetBaseVLDesignMatrix(fxVLData)
+    baseVLDM <- GetBaseVLDesignMatrix(fxVLData)
     fzData <- dt[, .(Consc, CobsTime, Consr, RobsTime, RLogObsTime2, DTime)]
-    baseRandEffDM <- HivEstInfTime:::GetBaseRandEffDesignMatrix(fzData)
+    baseRandEffDM <- GetBaseRandEffDesignMatrix(fzData)
 
     sigma2 <- params$sigma2
     errM <- dt$Consc * sigma2[1] + dt$Consr * sigma2[2]
     err <- diag(errM, nrow = length(errM))
 
-    intFit1 <- try(HivEstInfTime:::IntegratePostW(
+    intFit1 <- try(IntegratePostW(
       lower = 0,
       upper = migTime,
       y = y,
@@ -291,7 +291,7 @@ PredictInf <- function( # nolint
       err = err
     ), silent = TRUE)
 
-    intFit2 <- try(HivEstInfTime:::IntegratePostW(
+    intFit2 <- try(IntegratePostW(
       lower = migTime,
       upper = upTime,
       y = y,
@@ -404,7 +404,7 @@ PredictInf <- function( # nolint
       }
 
       # D. Mean
-      meanFit <- try(HivEstInfTime:::IntegrateMeanPostW(
+      meanFit <- try(IntegrateMeanPostW(
         lower = 0,
         upper = upTime,
         y = y,

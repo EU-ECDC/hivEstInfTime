@@ -15,6 +15,8 @@
 #' Creator: Daniel Lewandowski \email{daniel@@nextpagesoft.net}
 #'
 #' @importFrom Rcpp sourceCpp
+#' @importFrom stats coef formula model.matrix runif
+#' @importFrom utils read.csv
 #' @import data.table
 #'
 #' @useDynLib HivEstInfTime, .registration = TRUE

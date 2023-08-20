@@ -7,8 +7,8 @@
 PredictInf(
   input,
   params = GetMigrantParams(),
-  sampleSize = 50,
-  percentiles = c(0.025, 0.5, 0.975)
+  sampleSize = 50L,
+  percentiles = c()
 )
 }
 \arguments{

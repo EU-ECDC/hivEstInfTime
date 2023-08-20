@@ -10,7 +10,7 @@
 #' @export
 GetMigrantParams <- function() {
   # Estimates of the fixed effects parameters from the bivariate LMM applied to CASCADE data
-  fixedEffectsBivCASCADE <- read.csv(GetSystemFile('extdata/fixedEffectsBivCASCADE.csv'))
+  fixedEffectsBivCASCADE <- read.csv(GetSystemFile('extdata', 'fixedEffectsBivCASCADE.csv'))
   bFE <- fixedEffectsBivCASCADE[, 1]
   names(bFE) <- rownames(fixedEffectsBivCASCADE)
 
