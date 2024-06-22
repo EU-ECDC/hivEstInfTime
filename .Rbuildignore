@@ -1,4 +1,7 @@
 ^workspace\.code-workspace$
+^utils/
 ^misc$
 ^library$
 ^data-raw$
+^\.lintr$
+^\.github$
