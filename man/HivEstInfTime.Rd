@@ -2,6 +2,7 @@
 % Please edit documentation in R/HivEstInfTime-package.R
 \docType{package}
 \name{HivEstInfTime}
+\alias{HivEstInfTime-package}
 \alias{HivEstInfTime}
 \title{HIV Infection Time Estimation}
 \description{

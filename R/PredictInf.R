@@ -114,9 +114,9 @@ PredictInf <- function( # nolint
 
     if (
       IsError(intFit1) ||
-      IsError(intFit2) ||
-      toupper(intFit1$message) != 'OK' ||
-      toupper(intFit2$message) != 'OK'
+        IsError(intFit2) ||
+        toupper(intFit1$message) != 'OK' ||
+        toupper(intFit2$message) != 'OK'
     ) {
       next
     } else {
@@ -139,7 +139,7 @@ PredictInf <- function( # nolint
       ), silent = TRUE)
       if (
         !IsError(modeFit) &&
-        modeFit$convergence == 0
+          modeFit$convergence == 0
       ) {
         outputAIDS[i, ModeSCtoDiag := modeFit$par]
         if (sampleSize > 0L) {
@@ -187,7 +187,7 @@ PredictInf <- function( # nolint
       ))
       if (
         !IsError(meanFit) &&
-        toupper(meanFit$message) == 'OK'
+          toupper(meanFit$message) == 'OK'
       ) {
         outputAIDS[i, MeanSCtoDiag := meanFit$value]
       }
@@ -312,8 +312,8 @@ PredictInf <- function( # nolint
 
     if (
       IsError(intFit1) || IsError(intFit2) ||
-      intFit1$errorCode != 0L || intFit2$errorCode != 0L ||
-      is.na(intFit1$value) || is.na(intFit2$value)
+        intFit1$errorCode != 0L || intFit2$errorCode != 0L ||
+        is.na(intFit1$value) || is.na(intFit2$value)
     ) {
       next
     } else {
@@ -347,7 +347,7 @@ PredictInf <- function( # nolint
 
       if (
         !IsError(modeFit) &&
-        modeFit$convergence == 0
+          modeFit$convergence == 0
       ) {
         outputCD4VL[UniqueId == uniqueId, ModeSCtoDiag := modeFit$par]
         if (sampleSize > 0L) {
@@ -424,8 +424,8 @@ PredictInf <- function( # nolint
       ), silent = TRUE)
       if (
         !IsError(meanFit) &&
-        meanFit$errorCode == 0L &&
-        !is.na(intFit1$value)
+          meanFit$errorCode == 0L &&
+          !is.na(intFit1$value)
       ) {
         outputCD4VL[UniqueId == uniqueId, MeanSCtoDiag := meanFit$value]
       }

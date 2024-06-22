@@ -1,8 +1,8 @@
 Package: HivEstInfTime
 Type: Package
 Title: HIV Infection Time Estimation
-Version: 1.0.2
-Date: 2023-08-20
+Version: 1.0.3
+Date: 2024-06-22
 Authors@R: c(person('Nikos', 'Pantazis', email = 'npantaz@med.uoa.gr', role = c('aut')),
     person('Magdalena', 'Rosinska', email = 'mrosinska@pzh.gov.pl', role = c('aut', 'cph')),
     person('Ard', 'van Sighem', email = 'a.i.vansighem@amsterdamumc.nl', role = c('aut')),
@@ -20,6 +20,6 @@ Imports:
     stats
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Suggests: haven
 LinkingTo: Rcpp, RcppArmadillo, RcppEigen, RcppNumerical

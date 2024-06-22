@@ -24,3 +24,4 @@ IntegratePostW <- function(lower, upper, y, xAIDS, maxDTime, betaAIDS, kappa, bF
 IntegrateMeanPostW <- function(lower, upper, y, xAIDS, maxDTime, betaAIDS, kappa, bFE, varCovRE, baseCD4DM, fxCD4Data, baseVLDM, fxVLData, baseRandEffDM, fzData, err) {
     .Call(`_HivEstInfTime_IntegrateMeanPostW`, lower, upper, y, xAIDS, maxDTime, betaAIDS, kappa, bFE, varCovRE, baseCD4DM, fxCD4Data, baseVLDM, fxVLData, baseRandEffDM, fzData, err)
 }
+

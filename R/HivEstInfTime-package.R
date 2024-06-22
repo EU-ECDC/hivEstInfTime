@@ -1,5 +1,3 @@
-#' @docType package
-#'
 #' @name HivEstInfTime
 #'
 #' @title
@@ -20,4 +18,4 @@
 #' @import data.table
 #'
 #' @useDynLib HivEstInfTime, .registration = TRUE
-NULL
+"_PACKAGE"
