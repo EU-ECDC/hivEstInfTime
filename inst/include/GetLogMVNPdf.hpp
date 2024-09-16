@@ -1,9 +1,9 @@
-#ifndef _HivEstInfTime_GetLogMVNPdf_
-#define _HivEstInfTime_GetLogMVNPdf_
+#ifndef _hivEstInfTime_GetLogMVNPdf_
+#define _hivEstInfTime_GetLogMVNPdf_
 
 #include "const.h"
 
-namespace HivEstInfTime {
+namespace hivEstInfTime {
 
 static double GetLogMVNPdf(
   const arma::dvec& x,
@@ -27,4 +27,4 @@ static double GetLogMVNPdf(
 
 } // namespace
 
-#endif // _HivEstInfTime_GetLogMVNPdf_
+#endif // _hivEstInfTime_GetLogMVNPdf_

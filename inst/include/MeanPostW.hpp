@@ -1,5 +1,5 @@
-#ifndef _HivEstInfTime_MeanPostW_
-#define _HivEstInfTime_MeanPostW_
+#ifndef _hivEstInfTime_MeanPostW_
+#define _hivEstInfTime_MeanPostW_
 
 #include "Lspline.hpp"
 #include "UpdateCD4DesignMatrix.hpp"
@@ -7,7 +7,7 @@
 #include "UpdateRandEffDesignMatrix.hpp"
 #include "GetLogMVNPdf.hpp"
 
-namespace HivEstInfTime {
+namespace hivEstInfTime {
 
 class MeanPostW: public Numer::Func
 {
@@ -84,4 +84,4 @@ public:
 
 } // namespace
 
-#endif // _HivEstInfTime_MeanPostW_
+#endif // _hivEstInfTime_MeanPostW_

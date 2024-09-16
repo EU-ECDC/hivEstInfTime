@@ -1,4 +1,4 @@
-#' @name HivEstInfTime
+#' @name hivEstInfTime
 #'
 #' @title
 #' HIV Infection Time Estimation
@@ -17,5 +17,5 @@
 #' @importFrom utils read.csv
 #' @import data.table
 #'
-#' @useDynLib HivEstInfTime, .registration = TRUE
+#' @useDynLib hivEstInfTime, .registration = TRUE
 "_PACKAGE"

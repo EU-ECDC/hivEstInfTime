@@ -2,26 +2,26 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 Lspline <- function(x, knots) {
-    .Call(`_HivEstInfTime_Lspline`, x, knots)
+    .Call(`_hivEstInfTime_Lspline`, x, knots)
 }
 
 GetLogMVNPdf <- function(x, mu, sigma) {
-    .Call(`_HivEstInfTime_GetLogMVNPdf`, x, mu, sigma)
+    .Call(`_hivEstInfTime_GetLogMVNPdf`, x, mu, sigma)
 }
 
 PostW <- function(w, y, xAIDS, maxDTime, betaAIDS, kappa, bFE, varCovRE, baseCD4DM, fxCD4Data, baseVLDM, fxVLData, baseRandEffDM, fzData, err) {
-    .Call(`_HivEstInfTime_PostW`, w, y, xAIDS, maxDTime, betaAIDS, kappa, bFE, varCovRE, baseCD4DM, fxCD4Data, baseVLDM, fxVLData, baseRandEffDM, fzData, err)
+    .Call(`_hivEstInfTime_PostW`, w, y, xAIDS, maxDTime, betaAIDS, kappa, bFE, varCovRE, baseCD4DM, fxCD4Data, baseVLDM, fxVLData, baseRandEffDM, fzData, err)
 }
 
 VPostW <- function(w, y, xAIDS, maxDTime, betaAIDS, kappa, bFE, varCovRE, baseCD4DM, fxCD4Data, baseVLDM, fxVLData, baseRandEffDM, fzData, err) {
-    .Call(`_HivEstInfTime_VPostW`, w, y, xAIDS, maxDTime, betaAIDS, kappa, bFE, varCovRE, baseCD4DM, fxCD4Data, baseVLDM, fxVLData, baseRandEffDM, fzData, err)
+    .Call(`_hivEstInfTime_VPostW`, w, y, xAIDS, maxDTime, betaAIDS, kappa, bFE, varCovRE, baseCD4DM, fxCD4Data, baseVLDM, fxVLData, baseRandEffDM, fzData, err)
 }
 
 IntegratePostW <- function(lower, upper, y, xAIDS, maxDTime, betaAIDS, kappa, bFE, varCovRE, baseCD4DM, fxCD4Data, baseVLDM, fxVLData, baseRandEffDM, fzData, err) {
-    .Call(`_HivEstInfTime_IntegratePostW`, lower, upper, y, xAIDS, maxDTime, betaAIDS, kappa, bFE, varCovRE, baseCD4DM, fxCD4Data, baseVLDM, fxVLData, baseRandEffDM, fzData, err)
+    .Call(`_hivEstInfTime_IntegratePostW`, lower, upper, y, xAIDS, maxDTime, betaAIDS, kappa, bFE, varCovRE, baseCD4DM, fxCD4Data, baseVLDM, fxVLData, baseRandEffDM, fzData, err)
 }
 
 IntegrateMeanPostW <- function(lower, upper, y, xAIDS, maxDTime, betaAIDS, kappa, bFE, varCovRE, baseCD4DM, fxCD4Data, baseVLDM, fxVLData, baseRandEffDM, fzData, err) {
-    .Call(`_HivEstInfTime_IntegrateMeanPostW`, lower, upper, y, xAIDS, maxDTime, betaAIDS, kappa, bFE, varCovRE, baseCD4DM, fxCD4Data, baseVLDM, fxVLData, baseRandEffDM, fzData, err)
+    .Call(`_hivEstInfTime_IntegrateMeanPostW`, lower, upper, y, xAIDS, maxDTime, betaAIDS, kappa, bFE, varCovRE, baseCD4DM, fxCD4Data, baseVLDM, fxVLData, baseRandEffDM, fzData, err)
 }
 

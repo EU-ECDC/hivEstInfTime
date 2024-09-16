@@ -56,7 +56,7 @@ med_postWcd4 <- function(M) {
   integrate(VpostWcd4, lower = 0, upper = M)$value / res1$value - 0.5
 }
 med_postWcd4_2 <- function(M) {
-  HivEstInfTime:::IntegratePostW(
+  hivEstInfTime:::IntegratePostW(
     lower = 0,
     upper = M,
     y = y,
@@ -140,7 +140,7 @@ for (i in 1:G) {
 
   if (only[[i]][1] == "CD4 only") {
     res1 <- try(integrate(VpostWcd4, lower = 0, upper = uptime), silent = TRUE)
-    res1Mine <- try(HivEstInfTime:::IntegratePostW(
+    res1Mine <- try(hivEstInfTime:::IntegratePostW(
       lower = 0,
       upper = uptime,
       y = y,
