@@ -1,6 +1,6 @@
 GetSystemFile <- function(
   ...,
-  package = 'HivEstInfTime'
+  package = 'hivEstInfTime'
 ) {
   return(system.file(..., package = package))
 }

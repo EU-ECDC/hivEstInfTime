@@ -5,7 +5,7 @@ Rcpp::NumericVector Lspline(
   const Rcpp::NumericVector& x,
   const Rcpp::NumericVector& knots
 ) {
-  return HivEstInfTime::Lspline(x, knots);
+  return hivEstInfTime::Lspline(x, knots);
 };
 
 
@@ -15,7 +15,7 @@ double GetLogMVNPdf(
   const arma::dvec& mu,
   const arma::dmat& sigma
 ) {
-  return HivEstInfTime::GetLogMVNPdf(x, mu, sigma);
+  return hivEstInfTime::GetLogMVNPdf(x, mu, sigma);
 };
 
 // [[Rcpp::export]]
@@ -36,7 +36,7 @@ double PostW(
   const Rcpp::DataFrame& fzData,
   const arma::dmat& err
 ) {
-  HivEstInfTime::PostW f(
+  hivEstInfTime::PostW f(
     y, xAIDS, maxDTime, betaAIDS, kappa, bFE, varCovRE, baseCD4DM, fxCD4Data, baseVLDM, fxVLData,
     baseRandEffDM, fzData, err
   );
@@ -62,7 +62,7 @@ Rcpp::NumericVector VPostW(
   const Rcpp::DataFrame& fzData,
   const arma::dmat& err
 ) {
-  HivEstInfTime::PostW f(
+  hivEstInfTime::PostW f(
     y, xAIDS, maxDTime, betaAIDS, kappa, bFE, varCovRE, baseCD4DM, fxCD4Data, baseVLDM, fxVLData,
     baseRandEffDM, fzData, err
   );
@@ -95,7 +95,7 @@ Rcpp::List IntegratePostW(
   const Rcpp::DataFrame& fzData,
   const arma::dmat& err
 ) {
-  HivEstInfTime::PostW f(
+  hivEstInfTime::PostW f(
     y, xAIDS, maxDTime, betaAIDS, kappa, bFE, varCovRE, baseCD4DM, fxCD4Data, baseVLDM, fxVLData,
     baseRandEffDM, fzData, err
   );
@@ -140,7 +140,7 @@ Rcpp::List IntegrateMeanPostW(
   const Rcpp::DataFrame& fzData,
   const arma::dmat& err
 ) {
-  HivEstInfTime::MeanPostW f(
+  hivEstInfTime::MeanPostW f(
     y, xAIDS, maxDTime, betaAIDS, kappa, bFE, varCovRE, baseCD4DM, fxCD4Data, baseVLDM, fxVLData,
     baseRandEffDM, fzData, err
   );

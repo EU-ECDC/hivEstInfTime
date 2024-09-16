@@ -1,6 +1,6 @@
 .onUnload <- function(libPath, pkgname) {
 
-  library.dynam.unload('HivEstInfTime', libPath)
+  library.dynam.unload('hivEstInfTime', libPath)
 
   invisible(NULL)
 }

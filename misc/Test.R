@@ -1,7 +1,7 @@
 library(data.table)
 
 # Migration ----------------------------------------------------------------------------------------
-params <- HivEstInfTime::GetMigrantParams()
+params <- hivEstInfTime::GetMigrantParams()
 
 # Recon data set
 reconAIDS <- data.table::setDT(haven::read_dta('D:/VirtualBox_Shared/Migrant_test/baseAIDS.dta'))
@@ -51,8 +51,8 @@ input <- list(
 )
 
 # Create test dataset
-test <- HivEstInfTime::PredictInf(input, params)
-test <- HivEstInfTime::PredictInf(input, params, percentiles = c(0.025, 0.5, 0.975))
+test <- hivEstInfTime::PredictInf(input, params)
+test <- hivEstInfTime::PredictInf(input, params, percentiles = c(0.025, 0.5, 0.975))
 
 # Reconcile
 recon <- rbind(

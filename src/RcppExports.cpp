@@ -14,7 +14,7 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 
 // Lspline
 Rcpp::NumericVector Lspline(const Rcpp::NumericVector& x, const Rcpp::NumericVector& knots);
-RcppExport SEXP _HivEstInfTime_Lspline(SEXP xSEXP, SEXP knotsSEXP) {
+RcppExport SEXP _hivEstInfTime_Lspline(SEXP xSEXP, SEXP knotsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -26,7 +26,7 @@ END_RCPP
 }
 // GetLogMVNPdf
 double GetLogMVNPdf(const arma::dvec& x, const arma::dvec& mu, const arma::dmat& sigma);
-RcppExport SEXP _HivEstInfTime_GetLogMVNPdf(SEXP xSEXP, SEXP muSEXP, SEXP sigmaSEXP) {
+RcppExport SEXP _hivEstInfTime_GetLogMVNPdf(SEXP xSEXP, SEXP muSEXP, SEXP sigmaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -39,7 +39,7 @@ END_RCPP
 }
 // PostW
 double PostW(const double& w, const arma::dvec& y, const arma::dmat& xAIDS, const double& maxDTime, const arma::dmat& betaAIDS, const double& kappa, const arma::dmat& bFE, const arma::dmat& varCovRE, const Rcpp::List& baseCD4DM, const Rcpp::DataFrame& fxCD4Data, const Rcpp::List& baseVLDM, const Rcpp::DataFrame& fxVLData, const Rcpp::List& baseRandEffDM, const Rcpp::DataFrame& fzData, const arma::dmat& err);
-RcppExport SEXP _HivEstInfTime_PostW(SEXP wSEXP, SEXP ySEXP, SEXP xAIDSSEXP, SEXP maxDTimeSEXP, SEXP betaAIDSSEXP, SEXP kappaSEXP, SEXP bFESEXP, SEXP varCovRESEXP, SEXP baseCD4DMSEXP, SEXP fxCD4DataSEXP, SEXP baseVLDMSEXP, SEXP fxVLDataSEXP, SEXP baseRandEffDMSEXP, SEXP fzDataSEXP, SEXP errSEXP) {
+RcppExport SEXP _hivEstInfTime_PostW(SEXP wSEXP, SEXP ySEXP, SEXP xAIDSSEXP, SEXP maxDTimeSEXP, SEXP betaAIDSSEXP, SEXP kappaSEXP, SEXP bFESEXP, SEXP varCovRESEXP, SEXP baseCD4DMSEXP, SEXP fxCD4DataSEXP, SEXP baseVLDMSEXP, SEXP fxVLDataSEXP, SEXP baseRandEffDMSEXP, SEXP fzDataSEXP, SEXP errSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -64,7 +64,7 @@ END_RCPP
 }
 // VPostW
 Rcpp::NumericVector VPostW(const arma::dvec& w, const arma::dvec& y, const arma::dmat& xAIDS, const double& maxDTime, const arma::dmat& betaAIDS, const double& kappa, const arma::dmat& bFE, const arma::dmat& varCovRE, const Rcpp::List& baseCD4DM, const Rcpp::DataFrame& fxCD4Data, const Rcpp::List& baseVLDM, const Rcpp::DataFrame& fxVLData, const Rcpp::List& baseRandEffDM, const Rcpp::DataFrame& fzData, const arma::dmat& err);
-RcppExport SEXP _HivEstInfTime_VPostW(SEXP wSEXP, SEXP ySEXP, SEXP xAIDSSEXP, SEXP maxDTimeSEXP, SEXP betaAIDSSEXP, SEXP kappaSEXP, SEXP bFESEXP, SEXP varCovRESEXP, SEXP baseCD4DMSEXP, SEXP fxCD4DataSEXP, SEXP baseVLDMSEXP, SEXP fxVLDataSEXP, SEXP baseRandEffDMSEXP, SEXP fzDataSEXP, SEXP errSEXP) {
+RcppExport SEXP _hivEstInfTime_VPostW(SEXP wSEXP, SEXP ySEXP, SEXP xAIDSSEXP, SEXP maxDTimeSEXP, SEXP betaAIDSSEXP, SEXP kappaSEXP, SEXP bFESEXP, SEXP varCovRESEXP, SEXP baseCD4DMSEXP, SEXP fxCD4DataSEXP, SEXP baseVLDMSEXP, SEXP fxVLDataSEXP, SEXP baseRandEffDMSEXP, SEXP fzDataSEXP, SEXP errSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -89,7 +89,7 @@ END_RCPP
 }
 // IntegratePostW
 Rcpp::List IntegratePostW(const double& lower, const double& upper, const arma::dvec& y, const arma::dmat& xAIDS, const double& maxDTime, const arma::dmat& betaAIDS, const double& kappa, const arma::dmat& bFE, const arma::dmat& varCovRE, const Rcpp::List& baseCD4DM, const Rcpp::DataFrame& fxCD4Data, const Rcpp::List& baseVLDM, const Rcpp::DataFrame& fxVLData, const Rcpp::List& baseRandEffDM, const Rcpp::DataFrame& fzData, const arma::dmat& err);
-RcppExport SEXP _HivEstInfTime_IntegratePostW(SEXP lowerSEXP, SEXP upperSEXP, SEXP ySEXP, SEXP xAIDSSEXP, SEXP maxDTimeSEXP, SEXP betaAIDSSEXP, SEXP kappaSEXP, SEXP bFESEXP, SEXP varCovRESEXP, SEXP baseCD4DMSEXP, SEXP fxCD4DataSEXP, SEXP baseVLDMSEXP, SEXP fxVLDataSEXP, SEXP baseRandEffDMSEXP, SEXP fzDataSEXP, SEXP errSEXP) {
+RcppExport SEXP _hivEstInfTime_IntegratePostW(SEXP lowerSEXP, SEXP upperSEXP, SEXP ySEXP, SEXP xAIDSSEXP, SEXP maxDTimeSEXP, SEXP betaAIDSSEXP, SEXP kappaSEXP, SEXP bFESEXP, SEXP varCovRESEXP, SEXP baseCD4DMSEXP, SEXP fxCD4DataSEXP, SEXP baseVLDMSEXP, SEXP fxVLDataSEXP, SEXP baseRandEffDMSEXP, SEXP fzDataSEXP, SEXP errSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -115,7 +115,7 @@ END_RCPP
 }
 // IntegrateMeanPostW
 Rcpp::List IntegrateMeanPostW(const double& lower, const double& upper, const arma::dvec& y, const arma::dmat& xAIDS, const double& maxDTime, const arma::dmat& betaAIDS, const double& kappa, const arma::dmat& bFE, const arma::dmat& varCovRE, const Rcpp::List& baseCD4DM, const Rcpp::DataFrame& fxCD4Data, const Rcpp::List& baseVLDM, const Rcpp::DataFrame& fxVLData, const Rcpp::List& baseRandEffDM, const Rcpp::DataFrame& fzData, const arma::dmat& err);
-RcppExport SEXP _HivEstInfTime_IntegrateMeanPostW(SEXP lowerSEXP, SEXP upperSEXP, SEXP ySEXP, SEXP xAIDSSEXP, SEXP maxDTimeSEXP, SEXP betaAIDSSEXP, SEXP kappaSEXP, SEXP bFESEXP, SEXP varCovRESEXP, SEXP baseCD4DMSEXP, SEXP fxCD4DataSEXP, SEXP baseVLDMSEXP, SEXP fxVLDataSEXP, SEXP baseRandEffDMSEXP, SEXP fzDataSEXP, SEXP errSEXP) {
+RcppExport SEXP _hivEstInfTime_IntegrateMeanPostW(SEXP lowerSEXP, SEXP upperSEXP, SEXP ySEXP, SEXP xAIDSSEXP, SEXP maxDTimeSEXP, SEXP betaAIDSSEXP, SEXP kappaSEXP, SEXP bFESEXP, SEXP varCovRESEXP, SEXP baseCD4DMSEXP, SEXP fxCD4DataSEXP, SEXP baseVLDMSEXP, SEXP fxVLDataSEXP, SEXP baseRandEffDMSEXP, SEXP fzDataSEXP, SEXP errSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -141,16 +141,16 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_HivEstInfTime_Lspline", (DL_FUNC) &_HivEstInfTime_Lspline, 2},
-    {"_HivEstInfTime_GetLogMVNPdf", (DL_FUNC) &_HivEstInfTime_GetLogMVNPdf, 3},
-    {"_HivEstInfTime_PostW", (DL_FUNC) &_HivEstInfTime_PostW, 15},
-    {"_HivEstInfTime_VPostW", (DL_FUNC) &_HivEstInfTime_VPostW, 15},
-    {"_HivEstInfTime_IntegratePostW", (DL_FUNC) &_HivEstInfTime_IntegratePostW, 16},
-    {"_HivEstInfTime_IntegrateMeanPostW", (DL_FUNC) &_HivEstInfTime_IntegrateMeanPostW, 16},
+    {"_hivEstInfTime_Lspline", (DL_FUNC) &_hivEstInfTime_Lspline, 2},
+    {"_hivEstInfTime_GetLogMVNPdf", (DL_FUNC) &_hivEstInfTime_GetLogMVNPdf, 3},
+    {"_hivEstInfTime_PostW", (DL_FUNC) &_hivEstInfTime_PostW, 15},
+    {"_hivEstInfTime_VPostW", (DL_FUNC) &_hivEstInfTime_VPostW, 15},
+    {"_hivEstInfTime_IntegratePostW", (DL_FUNC) &_hivEstInfTime_IntegratePostW, 16},
+    {"_hivEstInfTime_IntegrateMeanPostW", (DL_FUNC) &_hivEstInfTime_IntegrateMeanPostW, 16},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_HivEstInfTime(DllInfo *dll) {
+RcppExport void R_init_hivEstInfTime(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }
