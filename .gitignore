@@ -1,2 +1,4 @@
 library/
+R/RcppExports.R
+src/RcppExports.cpp
 /.vs

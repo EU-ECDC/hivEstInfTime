@@ -1,8 +1,8 @@
 Package: hivEstInfTime
 Type: Package
 Title: HIV Infection Time Estimation
-Version: 1.0.3
-Date: 2024-06-22
+Version: 1.0.4
+Date: 2025-02-14
 Authors@R: c(person('Nikos', 'Pantazis', email = 'npantaz@med.uoa.gr', role = c('aut')),
     person('Magdalena', 'Rosinska', email = 'mrosinska@pzh.gov.pl', role = c('aut', 'cph')),
     person('Ard', 'van Sighem', email = 'a.i.vansighem@amsterdamumc.nl', role = c('aut')),
