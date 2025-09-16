@@ -1,5 +1,6 @@
 ^workspace\.code-workspace$
 ^utils/
+^LICENSE/
 ^misc$
 ^library$
 ^data-raw$
